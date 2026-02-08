@@ -4,16 +4,13 @@ class DynamicArray {
   #capacity;
   #GROWTH = 2;
 
-  constructor(cap, fill = 0) {
+  constructor(cap) {
     if (cap < 0 || !Number.isInteger(cap)) {
       throw new Error("Capacity must be positive integer");
     }
-    if (!Number.isInteger(fill)) {
-      throw new Error("Array must be filled only integers");
-    }
 
-    this.#arr = new Uint32Array(cap).fill(fill);
-    this.#size = cap;
+    this.#arr = new Uint32Array(cap);
+    this.#size = 0;
     this.#capacity = cap;
   }
 
@@ -408,10 +405,6 @@ class DynamicArray {
     const clone = new DynamicArray(this.#capacity);
 
     for (let i = 0; i < this.#size; ++i) {
-      clone.popBack();
-    }
-
-    for (let i = 0; i < this.#size; ++i) {
       clone.pushBack(this.#arr[i]);
     }
 
@@ -435,5 +428,3 @@ class DynamicArray {
     return true;
   }
 }
-
-const arr = new DynamicArray(4, 2);
