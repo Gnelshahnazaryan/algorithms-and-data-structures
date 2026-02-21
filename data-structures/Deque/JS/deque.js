@@ -1,4 +1,4 @@
-class Deque {
+module.exports = class Deque {
   #deque;
   #front;
   #size;
@@ -92,7 +92,7 @@ class Deque {
       throw new Error('Deque is empty');
     }
 
-    return this.#deque[this.#index(this.#front - 1)];
+    return this.#deque[this.#mod(this.#size - 1)];
   }
 
   at(i) {
