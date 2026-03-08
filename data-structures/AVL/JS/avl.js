@@ -4,7 +4,7 @@ class Node {
   right;
 
   constructor(value = null) {
-    value = value;
+    this.value = value;
     this.left = null;
     this.right = null;
     this.height = 1;
@@ -168,7 +168,7 @@ class AVL {
 
   #insert(node, value) {
     if (!node) {
-      ++this.size;
+      ++this.#size;
       return new Node(value);
     }
 
@@ -180,7 +180,7 @@ class AVL {
       node.right = this.#insert(node.right, value);
     }
 
-    node.height = this.#updateHeight(node);
+    this.#updateHeight(node);
     let bf = this.#balanceFactor(node);
 
     if (bf > 1 && node.left.value > value) {
