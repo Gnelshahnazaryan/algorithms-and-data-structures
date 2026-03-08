@@ -358,19 +358,27 @@ int* bst_preorder(const BST* tree, size_t* out_size)
 {
     if (!tree || !tree->root)
     {
-        *out_size = 0;
+        if (out_size)
+        {
+            *out_size = 0;
+        }
         return NULL;
     }
 
     int* arr = (int*)malloc(tree->size * sizeof(int));
     if (!arr)
     {
-        *out_size = 0;
+        if (out_size)
+        {
+            *out_size = 0;
+        }
         return NULL;
     }
 
     size_t index = 0;
     preorder_fill(tree->root, arr, &index);
+
+    *out_size = tree->size;
     return arr;
 }
 
@@ -378,19 +386,27 @@ int* bst_postorder(const BST* tree, size_t* out_size)
 {
     if (!tree || !tree->root)
     {
-        *out_size = 0;
+        if (out_size)
+        {
+            *out_size = 0;
+        }
         return NULL;
     }
 
     int* arr = (int*)malloc(tree->size * sizeof(int));
     if (!arr)
     {
-        *out_size = 0;
+        if (out_size)
+        {
+            *out_size = 0;
+        }
         return NULL;
     }
 
     size_t index = 0;
     postorder_fill(tree->root, arr, &index);
+
+    *out_size = tree->size;
     return arr;
 }
 
@@ -399,17 +415,29 @@ int* bst_level_order(const BST* tree, size_t* out_size)
     if (!tree || tree->size == 0)
     {
         if (out_size)
+        {
             *out_size = 0;
+        }
         return NULL;
     }
 
     int* arr = (int*)malloc(sizeof(int) * tree->size);
     if (!arr)
+    {
+        if (out_size)
+        {
+            *out_size = 0;
+        }
         return NULL;
+    }
 
     BST_Node** queue = (BST_Node**)malloc(sizeof(BST_Node*) * tree->size);
     if (!queue)
     {
+        if (out_size)
+        {
+            *out_size = 0;
+        }
         free(arr);
         return NULL;
     }
@@ -437,7 +465,7 @@ int* bst_level_order(const BST* tree, size_t* out_size)
 
     if (out_size)
     {
-        *out_size = index;
+        *out_size = tree->size;
     }
 
     return arr;
